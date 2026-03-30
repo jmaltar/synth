@@ -1,6 +1,13 @@
 # synth
 
-A portable, zero-dependency C++17 synthesis engine. No heap allocations, no external libraries -- everything is statically allocated at compile time, making it suitable for bare-metal microcontrollers and real-time audio alike. The same codebase runs on STM32 Cortex-M4/M7, ESP32-S3, Raspberry Pi Pico, and desktop Linux/Windows with no platform-specific #ifdefs in the core engine.
+A portable, zero-dependency C++17 synthesis engine. No heap allocations, no external libraries -- everything is statically allocated at compile time, making it suitable for bare-metal microcontrollers and real-time audio alike. The same codebase runs on STM32 Cortex-M4/M7, ESP32-S3, Raspberry Pi Pico, and desktop Linux with no platform-specific #ifdefs in the core engine.
+
+Used as a git submodule by:
+
+- [desktop-synth](https://github.com/jmaltar/desktop-synth) -- Linux native (PortAudio + PortMIDI)
+- [stm32f411-synth](https://github.com/jmaltar/stm32f411-synth) -- STM32F411 BlackPill
+- [stm32h723-synth](https://github.com/jmaltar/stm32h723-synth) -- STM32H723
+- [esp32-s3-synth](https://github.com/jmaltar/esp32-s3-synth) -- ESP32-S3
 
 ## Architecture
 
@@ -14,19 +21,19 @@ A portable, zero-dependency C++17 synthesis engine. No heap allocations, no exte
    ┌────────────────────────────────────────┐
    │                  Synth                 │
    │                 synth.h                │
-   └───────────────────▲───────────────────┘
+   └───────────────────▲────────────────────┘
                        │
                        │
    ┌────────────────────────────────────────┐
    │                 Voice                  │
    │                voice.h                 │
-   └────────▲───────────────────▲─────────┘
+   └────────▲─────────────────────▲─────────┘
             │                     │
             │                     │
    ┌──────────────────┐  ┌──────────────────┐
    │    Oscillator    │  │       ADSR       │
    │  oscillator.h    │  │     adsr.h       │
-   └────────▲────────┘  └───────▲─────────┘
+   └────────▲─────────┘  └────────▲─────────┘
             │                     │
             │                     │
    ┌──────────────────────────────────────┐
